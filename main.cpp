@@ -8,15 +8,22 @@ int main() {
 	std::cin.tie(0)->sync_with_stdio(0);
 	auto videoMgr = videoManager();
 
+	SetConsoleTextAttribute(cmdOut, CMD_WHITE);
+	std::cout << "cmdをでかく表示してください！再生中にESCキーを押すと終了します。" << std::endl;
+	std::cout << "準備できたら、何かキーを押してね。" << std::endl;
+	cv::waitKey(0);
+	system("cls");
+
 	while (cv::waitKey(1) != 27) {
 		if (videoMgr.GUIrender() == -1) {
-			std::cout << "Video load failed." << std::endl << "Press any key to exit." << std::endl; break;
+			std::cout << "Video load failed." << std::endl; break;
 		}
 		videoMgr.CMDRender();
 	}
 	
-	cv::waitKey(0);
 	SetConsoleTextAttribute(cmdOut, CMD_WHITE);
+	std::cout << std::endl << "Press any key to exit." << std::endl;
+	cv::waitKey(0);
 	return 0;
 }
 
